@@ -9,6 +9,7 @@ app.get('handle',function(request,response){
 //code to perform particular action.
 //To access GET variable use.
 //request.var1, request.var2 etc
+request.var
 });
 
 
