@@ -11,36 +11,37 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static('public'));
 
-var options = {
-    host: 'jira.freewebs.com',
-    path: '/rest/api/2/issue/DG-2079',
-    headers: {
-        Authorization: 'Basic dG9vbHM6cXdlcnR5Nw=='
-    }
-};
-
-https.get(options, function(res){
-  console.log("Got response: " + res.statusCode);
-  var data = '';
-
-  res.setEncoding('utf8');
-  res.on('data', function (chunk) {
-    data += chunk;
-});
-  res.on('end', function () {
-    app.locals.jira = JSON.parse(data);
-});
-})
-.on('error', function (err) {
-    console.log(err);
-});
-
 app.get('/', function (req, res) {
   res.render('index');
 });
 
 app.post('/search', function (req,res) {
   console.log(req.body);
+
+
+    var options = {
+        host: 'jira.freewebs.com',
+        path: '/rest/api/2/search?jql=project%20=%20SUPPORT%20AND%20text%20~%20"' + req.body.value + '"',
+        headers: {
+            Authorization: 'Basic dG9vbHM6cXdlcnR5Nw=='
+        }
+    };
+
+    https.get(options, function(resp){
+      console.log("Got response: " + res.statusCode);
+      var data = '';
+
+      resp.setEncoding('utf8');
+      resp.on('data', function (chunk) {
+        data += chunk;
+      });
+      resp.on('end', function () {
+        res.send(JSON.parse(data));
+      });
+    })
+    .on('error', function (err) {
+        console.log(err);
+    });
 });
 
 var server = app.listen(3000, function () {

@@ -7,6 +7,10 @@ $(document).ready(function(){
         dataType: 'json',
 				data: {
           value: request
+        },
+
+        success: function (data) {
+          console.log(data);
         }
 			});
 		});
