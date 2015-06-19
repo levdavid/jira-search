@@ -25,7 +25,7 @@ app.post('/search', function (req,res) {
         host: 'jira.freewebs.com',
         path: '/rest/api/2/search?jql=project%20=%20SUPPORT%20AND%20text%20~%20"' + encodeURIComponent(req.body.value) + '"',
         headers: {
-            Authorization: 'Basic dG9vbHM6cXdlcnR5Nw=='
+            Authorization: 'Basic ZWRldGhvcm5lOjRkeDR6eWNoRTQ='
         }
     };
 
