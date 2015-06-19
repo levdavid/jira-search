@@ -1,18 +1,26 @@
 var express = require('express');
 var app = express();
+var http = require('http');
+
 app.set('view engine', 'ejs');
 
+var options = {
+    host: 'https://jira.freewebs.com',
+    path: '/rest/api/2/issue/DG-2079',
+    headers: {
+        'Authorization' : 'Basic dG9vbHM6cXdlcnR5Nw=='
+    }
+};
 
 
-// sample ajax call?
-app.get('handle',function(request,response){
-//code to perform particular action.
-//To access GET variable use.
-//request.var1, request.var2 etc
-request.var
+http.get(options, function(res){
+    app.locals.jira =  res.body;
+    console.log(res.body);
 });
 
 
+
+/*
 app.locals.jira = {
     "expand": "renderedFields,names,schema,transitions,operations,editmeta,changelog",
     "id": "10002",
@@ -215,7 +223,7 @@ app.locals.jira = {
 };
 app.get('/', function (req, res) {
   res.render('index');
-});
+});*/
 
 var server = app.listen(3000, function () {
 
