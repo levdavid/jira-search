@@ -4,7 +4,10 @@ $(document).ready(function(){
 			$.ajax({
 				method: 'POST',
 				url: '/search',
-				data: request
+        dataType: 'json',
+				data: {
+          value: request
+        }
 			});
 		});
 	}
