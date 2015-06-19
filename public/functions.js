@@ -10,7 +10,7 @@ $(document).ready(function(){
           value: request
         },
         success: function (data) {
-          $('.items').html(data);
+          $('.ticket-table').show().html(data);
         }
 			});
     }

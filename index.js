@@ -4,9 +4,8 @@ var https = require('https');
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
 var fs = require('fs');
-
-
 app.set('view engine', 'ejs');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -42,7 +41,7 @@ app.post('/search', function (req,res) {
         var file = fs.readFileSync(__dirname + '/views/ticket.ejs', 'ascii');
         var all = '';
         data.issues.forEach(function (ticket) {
-            var rendered = ejs.render(file, { ticket: ticket } );
+            var rendered = ejs.render(file, { jira: ticket } );
             all += rendered;
         });
         res.send(all);
@@ -52,6 +51,9 @@ app.post('/search', function (req,res) {
     .on('error', function (err) {
         console.log(err);
     });
+});
+app.get('/', function (req, res) {
+  res.render('index');
 });
 
 var server = app.listen(3000, function () {

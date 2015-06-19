@@ -1,2 +1,16 @@
-<div><%= ticket.id %></div>
-<div><%= ticket.key %></div>
+<li class="row">
+  <ol>
+    <li class="key">
+      <a href="https://jira.freewebs.com/browse/<%= jira.key %>">
+        <%= jira.key %>
+      </a>
+    </li>
+    <li class="summary" title="<%= jira.fields.description %>">
+      <%= jira.fields.summary %>
+    </li>
+    <li class="status" title="<%= jira.fields.status.description %>">
+      <%= jira.fields.status.name %>
+    </li>
+  </ol>
+  <p class="ticket-desc"><strong>Description: </strong><%= jira.fields.description %></p>
+</li>

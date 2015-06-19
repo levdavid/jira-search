@@ -38,3 +38,58 @@
     .search-query:focus + button {
         z-index: 3;   
     }
+
+html {
+      background: rgba(220,231,235,1);
+    }
+    body {
+      /*display: inline-block;*/
+      width: 960px;
+      margin: 0 auto;
+      background: rgba(254,255,250,1);
+      font: normal 14px/1.4em 'Lato', sans-serif;
+    }
+    ul, ol {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    .ticket-table {
+      display: none;
+      padding-left: 20px
+    }
+    ol > li {
+      display: inline-block;
+      padding: 10px;
+    }
+    li > a {
+      text-decoration: none;
+      color: #2BA8E0;
+      font-weight: bold;
+    }
+    li > a:hover {
+      text-decoration: underline;
+      color: #1E96CC;
+    }
+    .ticket-table {
+    }
+    .header {
+      font-weight: bold;
+      font-size: 1.6em;
+      border-bottom: 1px solid rgba(220,231,235,1);
+    }
+    .row {
+      border-bottom: 1px solid rgba(220,231,235,1);
+    }
+    .key {
+      width: 180px;
+    }
+    .summary {
+      width: 480px;
+    }
+    .status {
+      width: 80px;
+    }
+    .ticket-desc {
+      padding: 10px;
+    }
