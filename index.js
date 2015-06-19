@@ -235,9 +235,16 @@ app.locals.jira = {
     },
     "schema": {}
 };*/
+
+
+
 app.get('/', function (req, res) {
   res.render('index');
 });
+
+app.post('/search', function (req,res) {
+    console.log(req.body);
+})
 
 var server = app.listen(3000, function () {
 
