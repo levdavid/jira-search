@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	$('button').on('click', function(){
+	
+	function handle(){
 		var request = $('input').val();
 			$.ajax({
 				method: 'POST',
@@ -13,9 +14,16 @@ $(document).ready(function(){
           $('.items').html(data);
         }
 			});
-    });
+    }
 
 
+	$('button').on('click', handle);
+
+	$('input').keypress(function(e) {
+    	if(e.which == 13) {
+    		handle();
+    }
+});
 
 	}
 );
