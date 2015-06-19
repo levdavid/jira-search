@@ -20,17 +20,16 @@ var options = {
 };
 
 https.get(options, function(res){
-    console.log("Got response: " + res.statusCode);
-    var data = '';
+  console.log("Got response: " + res.statusCode);
+  var data = '';
 
   res.setEncoding('utf8');
   res.on('data', function (chunk) {
     data += chunk;
-  });
+});
   res.on('end', function () {
-    
     app.locals.jira = JSON.parse(data);
-  });
+});
 })
 .on('error', function (err) {
     console.log(err);
@@ -41,7 +40,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/search', function (req,res) {
-    console.log(req.body);
+  console.log(req.body);
 });
 
 var server = app.listen(3000, function () {
