@@ -10,7 +10,6 @@ $(document).ready(function(){
           value: request
         },
         success: function (data) {
-          console.log(data);
           $('.items').html(data);
         }
 			});
