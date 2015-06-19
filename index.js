@@ -2,7 +2,10 @@ var express = require('express');
 var app = express();
 var https = require('https');
 
+
 app.set('view engine', 'ejs');
+
+app.use(express.static('public'));
 
 var options = {
     host: 'jira.freewebs.com',
