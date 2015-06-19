@@ -1,6 +1,26 @@
 var express = require('express');
 var app = express();
 app.set('view engine', 'ejs');
+
+
+
+// sample ajax call?
+var data = {};
+                    data.title = "title";
+                    data.message = "message";
+                    
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        url: 'http://localhost:3000/endpoint',                      
+                        success: function(data) {
+                            console.log('success');
+                            console.log(JSON.stringify(data));
+                        }
+                    });
+
+
 app.locals.jira = {
     "expand": "renderedFields,names,schema,transitions,operations,editmeta,changelog",
     "id": "10002",
