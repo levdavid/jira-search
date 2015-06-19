@@ -1,21 +1,32 @@
 var express = require('express');
 var app = express();
-var http = require('http');
+var https = require('https');
 
 app.set('view engine', 'ejs');
 
 var options = {
-    host: 'https://jira.freewebs.com',
+    host: 'jira.freewebs.com',
     path: '/rest/api/2/issue/DG-2079',
     headers: {
-        'Authorization' : 'Basic dG9vbHM6cXdlcnR5Nw=='
+        Authorization: 'Basic dG9vbHM6cXdlcnR5Nw=='
     }
 };
 
+https.get(options, function(res){
+    console.log("Got response: " + res.statusCode);
+    var data = '';
 
-http.get(options, function(res){
-    app.locals.jira =  res.body;
-    console.log(res.body);
+  res.setEncoding('utf8');
+  res.on('data', function (chunk) {
+    data += chunk;
+  });
+  res.on('end', function () {
+    
+    app.locals.jira = JSON.parse(data);
+  });
+})
+.on('error', function (err) {
+    console.log(err);
 });
 
 
@@ -220,10 +231,10 @@ app.locals.jira = {
         "timetracking": "timetracking"
     },
     "schema": {}
-};
+};*/
 app.get('/', function (req, res) {
   res.render('index');
-});*/
+});
 
 var server = app.listen(3000, function () {
 
