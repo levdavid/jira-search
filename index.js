@@ -17,12 +17,17 @@ app.get('/', function (req, res) {
 });
 
 app.post('/search', function (req,res) {
-  console.log(req.body);
+  var path = '';
+  if (req.body.value.match(/SUPPORT-\d+/i)) {
+    path = '/rest/api/2/issue/' + encodeURIComponent(req.body.value);
+  } else {
+    path = '/rest/api/2/search?jql=project%20=%20SUPPORT%20AND%20text%20~%20"' + encodeURIComponent(req.body.value) + '"';
+  }
 
 
     var options = {
         host: 'jira.freewebs.com',
-        path: '/rest/api/2/search?jql=project%20=%20SUPPORT%20AND%20text%20~%20"' + encodeURIComponent(req.body.value) + '"',
+        path: path,
         headers: {
             Authorization: 'Basic ZWRldGhvcm5lOjRkeDR6eWNoRTQ='
         }
@@ -40,10 +45,15 @@ app.post('/search', function (req,res) {
         data = JSON.parse(data);
         var file = fs.readFileSync(__dirname + '/views/ticket.ejs', 'ascii');
         var all = '';
+        if (req.body.value.match(/SUPPORT-\d+/i)){
+
+            all = ejs.render(file, { jira: data } );
+        }else{
         data.issues.forEach(function (ticket) {
             var rendered = ejs.render(file, { jira: ticket } );
             all += rendered;
         });
+    }
         res.send(all);
         res.end();
       });
