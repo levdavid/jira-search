@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var https = require('https');
 var bodyParser = require('body-parser');
+var ejs = require('ejs');
+var fs = require('fs');
 
 
 app.set('view engine', 'ejs');
@@ -36,7 +38,15 @@ app.post('/search', function (req,res) {
         data += chunk;
       });
       resp.on('end', function () {
-        res.send(JSON.parse(data));
+        data = JSON.parse(data);
+        var file = fs.readFileSync(__dirname + '/views/ticket.ejs', 'ascii');
+        var all = '';
+        data.issues.forEach(function (ticket) {
+            var rendered = ejs.render(file, { ticket: ticket } );
+            all += rendered;
+        });
+        res.send(all);
+        res.end();
       });
     })
     .on('error', function (err) {

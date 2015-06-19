@@ -4,11 +4,10 @@ $(document).ready(function(){
 			$.ajax({
 				method: 'POST',
 				url: '/search',
-        dataType: 'json',
+        accepts: 'text/html',
 				data: {
           value: request
         },
-
         success: function (data) {
           console.log(data);
         }
